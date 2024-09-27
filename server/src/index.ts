@@ -6,6 +6,7 @@ import "dotenv/config";
 
 import authRoute from "./routes/authRoute";
 import searchRoute from "./routes/searchRoute";
+import friendRoute from "./routes/friendRoute";
 
 const PORT = process.env.EXPRESS_PORT || 3000;
 
@@ -22,6 +23,7 @@ app.use(express.json());
 
 app.use("/api", authRoute);
 app.use("/api", searchRoute);
+app.use("/api", friendRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
