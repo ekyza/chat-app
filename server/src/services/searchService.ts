@@ -3,7 +3,7 @@ import { postgres } from "../databases/postgres";
 export const selectUserByUsername = async (username: string) => {
   const data = [username];
   const query = `
-    SELECT *
+    SELECT id, username
     FROM users
     WHERE username LIKE $1;
   `;

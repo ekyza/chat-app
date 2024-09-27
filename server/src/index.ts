@@ -8,6 +8,8 @@ import authRoute from "./routes/authRoute";
 import searchRoute from "./routes/searchRoute";
 import friendRoute from "./routes/friendRoute";
 
+import { isAuthenticated } from "./middlewares/authMiddleware";
+
 const PORT = process.env.EXPRESS_PORT || 3000;
 
 const app = express();
@@ -22,8 +24,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api", authRoute);
-app.use("/api", searchRoute);
-app.use("/api", friendRoute);
+app.use("/api", isAuthenticated, searchRoute);
+app.use("/api", isAuthenticated, friendRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

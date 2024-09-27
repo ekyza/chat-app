@@ -9,7 +9,7 @@ export const signUp = async (req: Request, res: Response) => {
     const { username, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const result = await insertAuth(username, hashedPassword);
-    const token = jwt.sign(result, process.env.JWT_ACCESS_TOKEN_SECRET);
+    const token = jwt.sign(result, process.env.JWT_ACCESS_TOKEN_SECRET, { expiresIn: 7200 });
 
     return res.status(201).json({
       statusCode: res.statusCode,
@@ -54,7 +54,7 @@ export const signIn = async (req: Request, res: Response) => {
       });
     }
 
-    const token = jwt.sign(result, process.env.JWT_ACCESS_TOKEN_SECRET);
+    const token = jwt.sign(result, process.env.JWT_ACCESS_TOKEN_SECRET, { expiresIn: 7200 });
 
     return res.status(200).json({
       statusCode: res.statusCode,
