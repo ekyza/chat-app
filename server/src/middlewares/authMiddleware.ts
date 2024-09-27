@@ -6,7 +6,7 @@ export const isAuthenticated = (req: Request, res: Response, next: NextFunction)
 
   if (accessToken === undefined) {
     return res.status(401).json({
-      status: 401,
+      statusCode: 401,
       message: "Unauthorized user",
     });
   }
@@ -16,7 +16,7 @@ export const isAuthenticated = (req: Request, res: Response, next: NextFunction)
   jwt.verify(token, process.env.JWT_ACCESS_TOKEN_SECRET, (error, user) => {
     if (error) {
       return res.status(403).json({
-        status: 403,
+        statusCode: 403,
         message: "Invalid access token",
       });
     }
